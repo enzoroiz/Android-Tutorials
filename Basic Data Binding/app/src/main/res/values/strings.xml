@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Basic Data Binding</string>
+    <string name="btn_label_show_progress_bar">Show Progress Bar</string>
+    <string name="btn_label_hide_progress_bar">Hide Progress Bar</string>
+    <string name="button_label_get_student">Get Student</string>
+</resources>

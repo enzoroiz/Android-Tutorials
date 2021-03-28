@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Notification</string>
+    <string name="notification_button_text">Show notification</string>
+    <string name="app_notification_title">Notification title</string>
+    <string name="app_notification_text">Notification content message</string>
+    <string name="app_notification_remote_input_received_text">Remote input received</string>
+    <string name="activity_details">DETAILS</string>
+    <string name="activity_settings">SETTINGS</string>
+    <string name="activity_notification">NOTIFICATION</string>
+    <string name="activity_remote_input">REMOTE INPUT</string>
+    <string name="app_notification_details_button_text">Details</string>
+    <string name="app_notification_settings_button_text">Settings</string>
+    <string name="app_notification_remote_input_button_text">Remote Input</string>
+</resources>

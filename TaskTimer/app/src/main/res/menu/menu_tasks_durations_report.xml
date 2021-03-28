@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_tasks_durations_report_filter_period"
+        android:icon="@drawable/ic_filter_seven"
+        android:title="@string/menu_tasks_durations_report_filter_day"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_tasks_durations_report_filter_date"
+        android:icon="@drawable/ic_date_range"
+        android:title="@string/menu_tasks_durations_report_filter_date"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_tasks_durations_report_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/menu_tasks_durations_report_delete"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/menu_tasks_durations_report_settings"
+        android:title="@string/menu_tasks_durations_report_settings"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Task Timer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_main_action_add_task">Add Task</string>
+    <string name="menu_main_action_show_duration">Show Duration</string>
+    <string name="menu_main_action_settings">Settings</string>
+    <string name="menu_main_action_show_about">About</string>
+    <string name="menu_main_action_generate">Generate Data</string>
+    <string name="label_no_timed_task">No task being timed</string>
+    <string name="content_description_task_edit_button">Button for editing a task</string>
+    <string name="content_description_task_delete_button">Button to delete a task</string>
+    <string name="edit_text_task_name_placeholder">Task name</string>
+    <string name="edit_text_task_description_placeholder">Description</string>
+    <string name="edit_text_task_sort_order_placeholder">Sort order</string>
+    <string name="button_task_save">Save</string>
+    <string name="empty_task_list_title">Instructions</string>
+    <string name="empty_task_list_message">Use the add button (+) in the toolbar above to create new tasks.\n\nTasks with lower sort orders will be placed higher up the list.\nTasks with the same sort order will be sorted alphabetically.\n\nLong clicking on  a task will start the timer for that task (and will stop the timer for any previous task that was being timed).\n\nEach task has an Edit and button if you want to change the details of the task. For deleting a task and it\'s timings, swipe the task to the left.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="task_delete_dialog_info_text">Deleting will also delete all timing data associated with task id %1$d: %2$s.</string>
+    <string name="task_delete_dialog_positive_button_text">Delete</string>
+    <string name="cancel_edit_dialog_info_text">You have unsaved changes. Do you want to abandon your changes or continue editing?</string>
+    <string name="cancel_edit_dialog_positive_button_text">Abandon</string>
+    <string name="cancel_edit_dialog_negative_button_text">Continue</string>
+    <string name="about_dialog_copyright">Copyright © 2020 ER Tech Solutions</string>
+    <string name="about_dialog_web_link">Find the developer \nat https://www.linkedin.com/in/enzo-roiz-3b06b5a6/</string>
+    <string name="about_dialog_credits">Task Timer 2020. Helping you to keep track of all your tasks.</string>
+
+    <string name="settings_dialog_starting_day_title">Select which day starts the week:</string>
+    <string-array name="settings_dialog_starting_days">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string name="settings_dialog_ignore_seconds_title">Ignore timings less than %1d %2s</string>
+    <string name="label_current_timed_task">Currently being timed: %1$s</string>
+    <string name="heading_durations_report_task_name_label">Name</string>
+    <string name="heading_durations_report_task_start_date_label">Start Date</string>
+    <string name="heading_durations_report_task_duration_label">Duration</string>
+    <string name="heading_durations_report_task_description_label">Description</string>
+    <string name="menu_tasks_durations_report_filter_day">Day</string>
+    <string name="menu_tasks_durations_report_filter_week">Week</string>
+    <string name="menu_tasks_durations_report_filter_date">Report Date</string>
+    <string name="menu_tasks_durations_report_delete">Delete Timings</string>
+    <string name="tasks_durations_report_dialog_filter_date_select">Select a date to filter the report</string>
+    <string name="tasks_durations_report_dialog_delete_up_to_date_select">Select a date to delete timings from</string>
+    <string name="timings_delete_dialog_title">Are you sure you want to delete all timings before %1$s?</string>
+    <string name="menu_tasks_durations_report_settings">Settings</string>
+    <string name="task_delete_being_edited_message">It\'s not possible to delete the task that it\'s being edited</string>
+    <plurals name="settings_dialog_seconds">
+        <item quantity="one">second</item>
+        <item quantity="other">seconds</item>
+    </plurals>
+    <plurals name="settings_dialog_minutes">
+        <item quantity="one">minute</item>
+        <item quantity="other">minutes</item>
+    </plurals>
+    <plurals name="settings_dialog_hours">
+        <item quantity="one">hour</item>
+        <item quantity="other">hours</item>
+    </plurals>
+</resources>

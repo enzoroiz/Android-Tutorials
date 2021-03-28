@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">RoomDatabase</string>
+    <string name="edit_text_name_hint">Name</string>
+    <string name="edit_text_email_hint">Email</string>
+    <string name="button_save_text">Save</string>
+    <string name="button_update_text">Update</string>
+    <string name="button_clear_all_text">Clear All</string>
+    <string name="button_delete_text">Delete</string>
+    <string name="event_subscriber_created_successfully">Subscriber saved successfully</string>
+    <string name="event_subscriber_updated_successfully">Subscriber updated successfully</string>
+    <string name="event_subscriber_deleted_successfully">Subscriber deleted successfully</string>
+    <string name="event_all_subscribers_deleted_successfully">All subscribers deleted successfully</string>
+    <string name="generic_error_message">An error occurred while executing this action</string>
+    <string name="event_subscriber_name_empty">Please fill in the subscriber name</string>
+    <string name="event_subscriber_email_empty">Please fill in the subscriber e-mail</string>
+    <string name="event_subscriber_email_invalid">Please correct the subscriber e-mail</string>
+</resources>

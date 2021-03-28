@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="NBA LIVE Mobile" />
+
+    <TextView
+        android:id="@+id/txtArtist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="viewEnd"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtName"
+        tools:text="Eletronic Arts" />
+
+    <TextView
+        android:id="@+id/txtSummary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtArtist"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum purus sapien, quis luctus enim faucibus et. Aenean nec purus ac metus ullamcorper luctus. Curabitur mollis vitae neque et rhoncus. Etiam eu ipsum nec leo tempus mollis et in elit. Vestibulum tempor porttitor elit, at imperdiet magna. Mauris non tortor convallis, mattis diam nec, efficitur magna. Nullam posuere, tortor et scelerisque aliquet, lorem dui suscipit ligula, vitae tristique enim augue ac purus. Pellentesque ullamcorper, velit eu lacinia dignissim, urna ligula blandit tortor, eget maximus sapien diam vitae sapien. Ut placerat, turpis sit amet maximus condimentum, risus turpis eleifend massa, id rutrum nulla felis at felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices sodales massa, vitae elementum lectus pretium sed. Quisque eros nisi, fringilla et condimentum sed, laoreet vel massa. Phasellus vitae ligula eget mi posuere aliquam. Mauris vel ipsum lacus. Etiam malesuada sapien non turpis suscipit, quis sollicitudin nibh bibendum. Maecenas imperdiet viverra ipsum eu consectetur." />
+</androidx.constraintlayout.widget.ConstraintLayout>

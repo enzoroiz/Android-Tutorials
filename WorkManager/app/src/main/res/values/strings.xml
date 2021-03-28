@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Work Manager</string>
+    <string name="button_start_one_time_work_request">Start One Time Work Request</string>
+</resources>
