@@ -1,4 +1,4 @@
-package com.enzoroiz.tmdb.presentation.di
+package com.enzoroiz.tmdb.presentation.di.core
 
 import com.enzoroiz.tmdb.data.api.TMDBService
 import dagger.Module
@@ -8,11 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+class NetworkModule(private val baseUrl: String) {
 
     @Singleton
     @Provides
-    fun provideRetrofit(baseUrl: String): Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseUrl)

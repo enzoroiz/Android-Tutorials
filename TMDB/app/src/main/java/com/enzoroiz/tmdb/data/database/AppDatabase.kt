@@ -16,8 +16,6 @@ private const val DATABASE_VERSION = 1
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    private var instance: AppDatabase? = null
-
     abstract fun getMovieDAO(): MovieDAO
     abstract fun getTVShowDAO(): TVShowDAO
     abstract fun getArtistDAO(): ArtistDAO

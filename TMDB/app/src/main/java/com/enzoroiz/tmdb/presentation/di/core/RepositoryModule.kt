@@ -1,4 +1,4 @@
-package com.enzoroiz.tmdb.presentation.di
+package com.enzoroiz.tmdb.presentation.di.core
 
 import com.enzoroiz.tmdb.data.domain.repository.ArtistsRepository
 import com.enzoroiz.tmdb.data.domain.repository.MovieRepository

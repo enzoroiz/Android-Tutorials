@@ -1,4 +1,4 @@
-package com.enzoroiz.tmdb.presentation.di
+package com.enzoroiz.tmdb.presentation.di.core
 
 import com.enzoroiz.tmdb.data.api.TMDBService
 import com.enzoroiz.tmdb.data.repository.artist.datasource.ArtistRemoteDataSource

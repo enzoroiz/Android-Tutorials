@@ -1,4 +1,4 @@
-package com.enzoroiz.tmdb.presentation.di
+package com.enzoroiz.tmdb.presentation.di.core
 
 import android.content.Context
 import androidx.room.Room
@@ -16,10 +16,8 @@ private const val DATABASE_NAME = "app_database"
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideDatabase() {
-        fun getInstance(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
-        }
+    fun provideDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
     }
 
     @Singleton

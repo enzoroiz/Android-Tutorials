@@ -1,4 +1,4 @@
-package com.enzoroiz.tmdb.presentation.di
+package com.enzoroiz.tmdb.presentation.di.core
 
 import com.enzoroiz.tmdb.data.repository.movie.datasource.MovieCacheDataSource
 import com.enzoroiz.tmdb.data.repository.movie.datasourceimplementation.MovieCacheDataSourceImpl
