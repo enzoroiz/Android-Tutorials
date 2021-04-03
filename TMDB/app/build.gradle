@@ -16,7 +16,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", '"https://api.themoviedb.org/"')
+        buildConfigField("String", "BASE_URL", '"https://api.themoviedb.org/3/"')
+        buildConfigField("String", "IMAGES_BASE_URL", '"https://image.tmdb.org/t/p/w500"')
         buildConfigField("String", "API_KEY",'"82f87b228812931232519540d252d2fa"')
         buildConfigField("String", "API_READ_ACCESS_TOKEN", '"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MmY4N2IyMjg4MTI5MzEyMzI1MTk1NDBkMjUyZDJmYSIsInN1YiI6IjYwNWUzZDQyNDM1MDExMDA2YjIyNjI5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DhDex0-RZ3nGUkuO4IDWG6QpsyJyfFVdQ-OaztzSGwQ"')
     }
@@ -55,6 +56,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.fragment:fragment-ktx:1.3.2"
 
     kapt "androidx.room:room-compiler:2.2.6"
     implementation "androidx.room:room-runtime:2.2.6"
