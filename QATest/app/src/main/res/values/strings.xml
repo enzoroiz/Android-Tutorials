@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QA Test</string>
+
+    <string name="button_login_text">Login</string>
+    <string name="edit_text_login_email_hint">E-mail</string>
+    <string name="edit_text_login_password_hint">Password</string>
+    <string name="text_view_login_invalid_credentials_error">Invalid credentials! Please check your data.</string>
+</resources>
