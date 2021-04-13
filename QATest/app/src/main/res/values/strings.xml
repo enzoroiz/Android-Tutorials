@@ -5,4 +5,7 @@
     <string name="edit_text_login_email_hint">E-mail</string>
     <string name="edit_text_login_password_hint">Password</string>
     <string name="text_view_login_invalid_credentials_error">Invalid credentials! Please check your data.</string>
+    <string name="button_map_locate_vehicle_text">Locate Vehicle</string>
+    <string name="button_map_open_vehicle_text">Open Vehicle</string>
+    <string name="button_map_nearby_vehicles_text">Nearby Vehicles</string>
 </resources>
