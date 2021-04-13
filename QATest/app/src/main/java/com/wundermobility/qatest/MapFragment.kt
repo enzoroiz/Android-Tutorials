@@ -1,5 +1,6 @@
 package com.wundermobility.qatest
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,18 +17,20 @@ import kotlinx.android.synthetic.main.fragment_map.*
 
 class MapFragment : Fragment() {
     companion object {
-        private const val MAP_ZOOM_LEVEL = 16F
+        private const val DEFAULT_MAP_ZOOM_LEVEL = 13F
+        private const val FOCUSED_MARKER_ZOOM_LEVEL = 16F
+        const val NEARBY_VEHICLES_LIST = "nearby_vehicles_list"
     }
 
-    private val vehicles = listOf(
+    private val vehicles = arrayListOf(
         Vehicle(
             id = 1L,
             name = "KickScooter D1",
             description = "Fastest KickScooter available in the market.",
             position = LatLng(51.514656, 7.467411),
             type = "Kick Scooter",
-            fuelLevel = 23,
-            pricePerMinute = 1.45,
+            fuelLevel = "23%",
+            price = "1.45$ / min",
             image = R.drawable.ic_blue_motorcycle
         ),
         Vehicle(
@@ -36,8 +39,8 @@ class MapFragment : Fragment() {
             description = "Amazing Electric Bike!",
             position = LatLng(51.508818, 7.450705),
             type = "Electric Bike",
-            fuelLevel = 84,
-            pricePerMinute = 0.75,
+            fuelLevel = "84%",
+            price = "0.75$ / hour",
             image = R.drawable.ic_orange_bike
         ),
         Vehicle(
@@ -46,15 +49,15 @@ class MapFragment : Fragment() {
             description = "Power is there from the beginning!",
             position = LatLng(51.510760, 7.464505),
             type = "Electric Car",
-            fuelLevel = 100,
-            pricePerMinute = 12.75,
+            fuelLevel = "100%",
+            price = "127.50 / day",
             image = R.drawable.ic_purple_car
         )
     )
 
     private val callback = OnMapReadyCallback { googleMap ->
         setupMarkers(googleMap)
-        btnMapLocateVehicle.setOnClickListener { locateVehicle(googleMap) }
+        btnMapLocateVehicle.setOnClickListener { locateVehicle(googleMap, FOCUSED_MARKER_ZOOM_LEVEL) }
     }
 
     override fun onCreateView(
@@ -69,6 +72,14 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+        btnMapNearbyVehicles.setOnClickListener {
+            val intent = Intent(requireContext(), NearbyVehiclesListActivity::class.java).apply {
+                putExtra(NEARBY_VEHICLES_LIST, vehicles)
+            }
+
+            startActivity(intent)
+        }
     }
 
     private fun setupMarkers(googleMap: GoogleMap) {
@@ -85,11 +96,11 @@ class MapFragment : Fragment() {
         locateVehicle(googleMap)
     }
 
-    private fun locateVehicle(googleMap: GoogleMap) {
+    private fun locateVehicle(googleMap: GoogleMap, zoomLevel: Float = DEFAULT_MAP_ZOOM_LEVEL) {
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 vehicles.first().position,
-                MAP_ZOOM_LEVEL
+                zoomLevel
             )
         )
     }
