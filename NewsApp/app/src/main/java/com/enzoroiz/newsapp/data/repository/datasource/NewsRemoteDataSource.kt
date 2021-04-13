@@ -4,6 +4,6 @@ import com.enzoroiz.newsapp.data.model.NewsResponse
 import retrofit2.Response
 
 interface NewsRemoteDataSource {
-    suspend fun getNewsHeadlines(): Response<NewsResponse>
+    suspend fun getNewsHeadlines(page: Int, country: String): Response<NewsResponse>
     suspend fun searchNews(searchQuery: String): Response<NewsResponse>
 }

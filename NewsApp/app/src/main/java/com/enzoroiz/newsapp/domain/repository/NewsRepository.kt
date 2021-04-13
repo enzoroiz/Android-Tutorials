@@ -5,7 +5,7 @@ import com.enzoroiz.newsapp.data.model.NewsResponse
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
-    suspend fun getNewsHeadlines(): Resource<NewsResponse>
+    suspend fun getNewsHeadlines(page: Int, country: String): Resource<NewsResponse>
     suspend fun searchNews(searchQuery: String): Resource<NewsResponse>
     suspend fun saveArticle(article: Article)
     suspend fun deleteArticle(article: Article)

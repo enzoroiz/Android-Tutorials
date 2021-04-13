@@ -6,11 +6,9 @@ import com.enzoroiz.newsapp.data.repository.datasource.NewsRemoteDataSource
 import retrofit2.Response
 
 class NewsRemoteDataSourceImpl(
-    private val service: NewsService,
-    private val page: Int,
-    private val country: String
+    private val service: NewsService
 ): NewsRemoteDataSource {
-    override suspend fun getNewsHeadlines(): Response<NewsResponse> {
+    override suspend fun getNewsHeadlines(page: Int, country: String): Response<NewsResponse> {
         return service.getNewsHeadlines(page, country)
     }
 
