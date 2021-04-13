@@ -1,33 +1,41 @@
 package com.wundermobility.qatest
 
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.fragment_map.*
 
 class MapFragment : Fragment() {
+    companion object {
+        private const val MAP_ZOOM_LEVEL = 16F
+    }
+
+    private val vehicles = listOf(
+        Vehicle(
+            id = 1L,
+            name = "KickScooter D1",
+            description = "Fastest KickScooter available in the market.",
+            position = LatLng(51.514656, 7.467411),
+            type = "Kick Scooter",
+            fuelLevel = 23,
+            pricePerMinute = 1.45,
+            image = R.drawable.common_full_open_on_phone,
+            markerIcon = R.drawable.common_full_open_on_phone
+        )
+    )
 
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        setupMarkers(googleMap)
+        btnMapLocateVehicle.setOnClickListener { locateVehicle(googleMap) }
     }
 
     override fun onCreateView(
@@ -42,5 +50,28 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+    }
+
+    private fun setupMarkers(googleMap: GoogleMap) {
+        vehicles.forEach { vehicle ->
+            googleMap.addMarker(
+                MarkerOptions()
+                    .position(vehicle.position)
+                    .title(vehicle.name)
+                    .icon(BitmapDescriptorFactory.fromResource(vehicle.markerIcon))
+                    .snippet(vehicle.description)
+            ).apply { tag = vehicle }
+        }
+
+        locateVehicle(googleMap)
+    }
+
+    private fun locateVehicle(googleMap: GoogleMap) {
+        googleMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                vehicles.first().position,
+                MAP_ZOOM_LEVEL
+            )
+        )
     }
 }
