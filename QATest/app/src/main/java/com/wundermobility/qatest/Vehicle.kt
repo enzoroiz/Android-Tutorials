@@ -11,6 +11,5 @@ data class Vehicle(
     val type: String,
     val fuelLevel: Int,
     val pricePerMinute: Double,
-    @DrawableRes val image: Int,
-    @DrawableRes val markerIcon: Int
+    @DrawableRes val image: Int
 )

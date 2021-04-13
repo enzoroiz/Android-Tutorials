@@ -28,8 +28,27 @@ class MapFragment : Fragment() {
             type = "Kick Scooter",
             fuelLevel = 23,
             pricePerMinute = 1.45,
-            image = R.drawable.common_full_open_on_phone,
-            markerIcon = R.drawable.common_full_open_on_phone
+            image = R.drawable.ic_blue_motorcycle
+        ),
+        Vehicle(
+            id = 2L,
+            name = "Electric Bike B1",
+            description = "Amazing Electric Bike!",
+            position = LatLng(51.508818, 7.450705),
+            type = "Electric Bike",
+            fuelLevel = 84,
+            pricePerMinute = 0.75,
+            image = R.drawable.ic_orange_bike
+        ),
+        Vehicle(
+            id = 3L,
+            name = "Electric Car C1",
+            description = "Power is there from the beginning!",
+            position = LatLng(51.510760, 7.464505),
+            type = "Electric Car",
+            fuelLevel = 100,
+            pricePerMinute = 12.75,
+            image = R.drawable.ic_purple_car
         )
     )
 
@@ -56,9 +75,9 @@ class MapFragment : Fragment() {
         vehicles.forEach { vehicle ->
             googleMap.addMarker(
                 MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(vehicle.image))
                     .position(vehicle.position)
                     .title(vehicle.name)
-                    .icon(BitmapDescriptorFactory.fromResource(vehicle.markerIcon))
                     .snippet(vehicle.description)
             ).apply { tag = vehicle }
         }
