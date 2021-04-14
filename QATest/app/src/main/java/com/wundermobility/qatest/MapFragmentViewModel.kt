@@ -148,4 +148,8 @@ class MapFragmentViewModel : ViewModel() {
             rentedVehicleMutableLiveData.value = null
         }, LOADING_TIME_IN_MS)
     }
+
+    fun deselectVehicle() {
+        selectedVehicleMutableLiveData.value = null
+    }
 }

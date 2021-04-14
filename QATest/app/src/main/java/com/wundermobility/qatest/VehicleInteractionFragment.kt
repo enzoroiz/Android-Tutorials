@@ -27,6 +27,7 @@ class VehicleInteractionFragment : Fragment() {
         })
 
         viewModel.selectedVehicleLiveData.value?.let { selected ->
+            btnCardVehicleAvailableClose.setOnClickListener { viewModel.deselectVehicle() }
             imgCardVehicleAvailableImage.setImageResource(selected.image)
             txtCardVehicleAvailableType.text = selected.type
             txtCardVehicleAvailableName.text = selected.name
@@ -35,7 +36,7 @@ class VehicleInteractionFragment : Fragment() {
             txtCardVehicleAvailablePrice.text = selected.price
 
             setupActions(selected, viewModel.rentedVehicleLiveData.value)
-        }
+        } ?: let { layoutCardVehicleAvailable.visibility = View.INVISIBLE }
     }
 
     private fun setupActions(selected: Vehicle?, rentedVehicle: Vehicle?) {

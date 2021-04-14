@@ -50,7 +50,7 @@ class MapFragment : Fragment() {
     private fun setupObservers() {
         viewModel.selectedVehicleLiveData.observe(this, Observer { selectedVehicle ->
             selectedVehicle?.let {  vehicle ->
-                showVehicleAvailableFragment()
+                updateVehicleInteractionFragment()
                 btnMapLocateVehicle.apply {
                     isEnabled = true
                     setOnClickListener {
@@ -59,11 +59,12 @@ class MapFragment : Fragment() {
                 }
             } ?: let {
                 btnMapLocateVehicle.isEnabled = false
+                updateVehicleInteractionFragment()
             }
         })
     }
 
-    private fun showVehicleAvailableFragment() {
+    private fun updateVehicleInteractionFragment() {
         val fragment = VehicleInteractionFragment.newInstance()
         childFragmentManager.beginTransaction().apply {
             setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down)
