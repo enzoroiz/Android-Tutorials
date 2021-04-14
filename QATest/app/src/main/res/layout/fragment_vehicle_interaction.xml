@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutCardVehicleAvailable"
+    android:id="@+id/layoutCardVehicle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/card_background"
@@ -24,7 +24,7 @@
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutCardVehicleAvailableData"
+        android:id="@+id/layoutCardVehicleData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtCardVehicleAvailableType"
+            android:id="@+id/txtCardVehicleType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -42,7 +42,7 @@
             tools:text="Electric Bike" />
 
         <ImageView
-            android:id="@+id/imgCardVehicleAvailableImage"
+            android:id="@+id/imgCardVehicleImage"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginTop="8dp"
@@ -50,46 +50,46 @@
             android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleAvailableType"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleType"
             tools:srcCompat="@drawable/ic_orange_bike" />
 
         <TextView
-            android:id="@+id/txtCardVehicleAvailableName"
+            android:id="@+id/txtCardVehicleName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgCardVehicleAvailableImage"
-            app:layout_constraintTop_toTopOf="@+id/imgCardVehicleAvailableImage"
+            app:layout_constraintStart_toEndOf="@+id/imgCardVehicleImage"
+            app:layout_constraintTop_toTopOf="@+id/imgCardVehicleImage"
             tools:text="Electric Bike B1" />
 
         <TextView
-            android:id="@+id/txtCardVehicleAvailableDescription"
+            android:id="@+id/txtCardVehicleDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/txtCardVehicleAvailableName"
-            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleAvailableName"
+            app:layout_constraintStart_toStartOf="@+id/txtCardVehicleName"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleName"
             tools:text="Fastest electric bike available for rental in this whole city!" />
 
         <TextView
-            android:id="@+id/txtCardVehicleAvailableFuelLevel"
+            android:id="@+id/txtCardVehicleFuelLevel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/txtCardVehicleAvailableDescription"
-            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleAvailableDescription"
+            app:layout_constraintStart_toStartOf="@+id/txtCardVehicleDescription"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleDescription"
             tools:text="84%" />
 
         <TextView
-            android:id="@+id/txtCardVehicleAvailablePrice"
+            android:id="@+id/txtCardVehiclePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBaseline_toBaselineOf="@+id/txtCardVehicleAvailableFuelLevel"
+            app:layout_constraintBaseline_toBaselineOf="@+id/txtCardVehicleFuelLevel"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="5.32$ / min" />
 
@@ -103,9 +103,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/btnCardVehicleAvailableClose"
+            android:id="@+id/btnCardVehicleClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +114,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutCardVehicleAvailableAction"
+        android:id="@+id/layoutCardVehicleAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -121,10 +122,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutCardVehicleAvailableData">
+        app:layout_constraintTop_toBottomOf="@id/layoutCardVehicleData">
 
         <Button
-            android:id="@+id/btnCardVehicleAvailableGoToRentedVehicle"
+            android:id="@+id/btnCardVehicleGoToRentedVehicle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_card_vehicle_available_go_to_rented_vehicle_text"
@@ -137,18 +138,18 @@
             tools:visibility="visible" />
 
         <Button
-            android:id="@+id/btnCardVehicleAvailableRentVehicle"
+            android:id="@+id/btnCardVehicleRentVehicle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/button_card_vehicle_available_rent_vehicle_text"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnCardVehicleAvailableGoToRentedVehicle"
+            app:layout_constraintTop_toBottomOf="@id/btnCardVehicleGoToRentedVehicle"
             tools:visibility="visible" />
 
         <Button
-            android:id="@+id/btnCardVehicleAvailableEndRent"
+            android:id="@+id/btnCardVehicleEndRent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_card_vehicle_available_end_rent_text"
@@ -156,7 +157,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCardVehicleAvailableRentVehicle"
+            app:layout_constraintTop_toBottomOf="@+id/btnCardVehicleRentVehicle"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

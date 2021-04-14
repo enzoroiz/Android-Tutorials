@@ -27,26 +27,26 @@ class VehicleInteractionFragment : Fragment() {
         })
 
         viewModel.selectedVehicleLiveData.value?.let { selected ->
-            btnCardVehicleAvailableClose.setOnClickListener { viewModel.deselectVehicle() }
-            imgCardVehicleAvailableImage.setImageResource(selected.image)
-            txtCardVehicleAvailableType.text = selected.type
-            txtCardVehicleAvailableName.text = selected.name
-            txtCardVehicleAvailableDescription.text = selected.description
-            txtCardVehicleAvailableFuelLevel.text = selected.fuelLevel
-            txtCardVehicleAvailablePrice.text = selected.price
+            btnCardVehicleClose.setOnClickListener { viewModel.deselectVehicle() }
+            imgCardVehicleImage.setImageResource(selected.image)
+            txtCardVehicleType.text = selected.type
+            txtCardVehicleName.text = selected.name
+            txtCardVehicleDescription.text = selected.description
+            txtCardVehicleFuelLevel.text = selected.fuelLevel
+            txtCardVehiclePrice.text = selected.price
 
             setupActions(selected, viewModel.rentedVehicleLiveData.value)
-        } ?: let { layoutCardVehicleAvailable.visibility = View.INVISIBLE }
+        } ?: let { layoutCardVehicle.visibility = View.INVISIBLE }
     }
 
     private fun setupActions(selected: Vehicle?, rentedVehicle: Vehicle?) {
-        btnCardVehicleAvailableGoToRentedVehicle.visibility = View.GONE
-        btnCardVehicleAvailableRentVehicle.visibility = View.GONE
-        btnCardVehicleAvailableEndRent.visibility = View.GONE
+        btnCardVehicleGoToRentedVehicle.visibility = View.GONE
+        btnCardVehicleRentVehicle.visibility = View.GONE
+        btnCardVehicleEndRent.visibility = View.GONE
 
         rentedVehicle?.let { rented ->
             if (selected == rented) {
-                btnCardVehicleAvailableEndRent.apply {
+                btnCardVehicleEndRent.apply {
                     visibility = View.VISIBLE
                     isEnabled = true
 
@@ -57,13 +57,13 @@ class VehicleInteractionFragment : Fragment() {
                     }
                 }
             } else {
-                btnCardVehicleAvailableGoToRentedVehicle.apply {
+                btnCardVehicleGoToRentedVehicle.apply {
                     visibility = View.VISIBLE
                     setOnClickListener { viewModel.goToRentedVehicle() }
                 }
             }
         } ?: let {
-            btnCardVehicleAvailableRentVehicle.apply {
+            btnCardVehicleRentVehicle.apply {
                 visibility = View.VISIBLE
                 isEnabled = true
 
