@@ -38,6 +38,7 @@ class MapFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
+        btnMapLocateVehicle.isEnabled = false
         btnMapNearbyVehicles.setOnClickListener {
             val intent = Intent(requireContext(), NearbyVehiclesListActivity::class.java).apply {
                 putExtra(NEARBY_VEHICLES_LIST, viewModel.vehicles)
