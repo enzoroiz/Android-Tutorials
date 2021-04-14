@@ -1,5 +1,7 @@
 package com.wundermobility.qatest
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -11,6 +13,14 @@ class MapFragmentViewModel: ViewModel() {
     companion object {
         private const val DEFAULT_MAP_ZOOM_LEVEL = 13F
     }
+
+    private val selectedVehicleMutableLiveData = MutableLiveData<Vehicle?>()
+    val selectedVehicleLiveData: LiveData<Vehicle?>
+        get() = selectedVehicleMutableLiveData
+
+    private val rentedVehicleMutableLiveData = MutableLiveData<Vehicle?>()
+    val rentedVehicleLiveData: LiveData<Vehicle?>
+        get() = rentedVehicleMutableLiveData
 
     val vehicles = arrayListOf(
         Vehicle(
@@ -47,7 +57,7 @@ class MapFragmentViewModel: ViewModel() {
             id = 4L,
             name = "Electric Bike B4",
             description = "Go green with this e-bike.",
-            position = LatLng(51.490222, 7.511756),
+            position = LatLng(51.530465, 7.446047),
             type = "Electric Bike",
             fuelLevel = "46%",
             price = "0.55$ / hour",
@@ -86,6 +96,15 @@ class MapFragmentViewModel: ViewModel() {
             ).apply { tag = vehicle }
         }
 
+        googleMap.setOnMarkerClickListener {
+            val currentVehicle = it.tag as Vehicle
+            if (currentVehicle != selectedVehicleMutableLiveData.value) {
+                selectedVehicleMutableLiveData.value = it.tag as Vehicle
+            }
+
+            false
+        }
+
         locateVehicle(googleMap)
     }
 
@@ -96,5 +115,9 @@ class MapFragmentViewModel: ViewModel() {
                 zoomLevel
             )
         )
+    }
+
+    fun rentVehicle(vehicle: Vehicle) {
+        rentedVehicleMutableLiveData.value = vehicle
     }
 }

@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.fragment_map.*
+
 
 class MapFragment : Fragment() {
     companion object {
@@ -20,7 +22,13 @@ class MapFragment : Fragment() {
     private val viewModel by viewModels<MapFragmentViewModel>()
     private val callback = OnMapReadyCallback { googleMap ->
         viewModel.setupMarkers(googleMap)
-        btnMapLocateVehicle.setOnClickListener { viewModel.locateVehicle(googleMap, FOCUSED_MARKER_ZOOM_LEVEL) }
+        setupObservers()
+        btnMapLocateVehicle.setOnClickListener {
+            viewModel.locateVehicle(
+                googleMap,
+                FOCUSED_MARKER_ZOOM_LEVEL
+            )
+        }
     }
 
     override fun onCreateView(
@@ -42,6 +50,27 @@ class MapFragment : Fragment() {
             }
 
             startActivity(intent)
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.selectedVehicleLiveData.observe(this, Observer { vehicle ->
+            vehicle?.let { showVehicleAvailableFragment(vehicle) }
+        })
+
+//        viewModel.rentedVehicleLiveData.observe(this, Observer { vehicle ->
+//
+//        })
+    }
+
+    private fun showVehicleAvailableFragment(vehicle: Vehicle) {
+//        if (vehicle == viewModel.selectedVehicleLiveData.value) return
+
+        val fragment = VehicleAvailableFragment.newInstance(vehicle)
+        childFragmentManager.beginTransaction().apply {
+            setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down)
+            replace(R.id.fragmentMapCardContainer, fragment, null)
+            commit()
         }
     }
 }
