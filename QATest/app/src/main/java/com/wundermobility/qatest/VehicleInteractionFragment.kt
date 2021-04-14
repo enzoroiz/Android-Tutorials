@@ -22,6 +22,7 @@ class VehicleInteractionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.rentedVehicleLiveData.observe(viewLifecycleOwner, Observer { rentedVehicle ->
+            progressBar.visibility = View.GONE
             setupActions(viewModel.selectedVehicleLiveData.value, rentedVehicle)
         })
 
@@ -46,7 +47,13 @@ class VehicleInteractionFragment : Fragment() {
             if (selected == rented) {
                 btnCardVehicleAvailableEndRent.apply {
                     visibility = View.VISIBLE
-                    setOnClickListener { viewModel.endRent() }
+                    isEnabled = true
+
+                    setOnClickListener {
+                        isEnabled = false
+                        progressBar.visibility = View.VISIBLE
+                        viewModel.endRent()
+                    }
                 }
             } else {
                 btnCardVehicleAvailableGoToRentedVehicle.apply {
@@ -57,7 +64,13 @@ class VehicleInteractionFragment : Fragment() {
         } ?: let {
             btnCardVehicleAvailableRentVehicle.apply {
                 visibility = View.VISIBLE
-                setOnClickListener { viewModel.rentVehicle() }
+                isEnabled = true
+
+                setOnClickListener {
+                    isEnabled = false
+                    progressBar.visibility = View.VISIBLE
+                    viewModel.rentVehicle()
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.wundermobility.qatest
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,9 +13,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapFragmentViewModel : ViewModel() {
     companion object {
+        private const val LOADING_TIME_IN_MS = 2000L
         const val DEFAULT_MAP_ZOOM_LEVEL = 13F
         const val FOCUSED_MARKER_ZOOM_LEVEL = 16F
     }
+
+    private val handler = Handler(Looper.getMainLooper())
 
     private val selectedVehicleMutableLiveData = MutableLiveData<Vehicle?>()
     val selectedVehicleLiveData: LiveData<Vehicle?>
@@ -132,11 +137,15 @@ class MapFragmentViewModel : ViewModel() {
 
     fun rentVehicle() {
         selectedVehicleLiveData.value?.let { selectedVehicle ->
-            rentedVehicleMutableLiveData.value = selectedVehicle
+            handler.postDelayed({
+                rentedVehicleMutableLiveData.value = selectedVehicle
+            }, LOADING_TIME_IN_MS)
         }
     }
 
     fun endRent() {
-        rentedVehicleMutableLiveData.value = null
+        handler.postDelayed({
+            rentedVehicleMutableLiveData.value = null
+        }, LOADING_TIME_IN_MS)
     }
 }
