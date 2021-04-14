@@ -6,29 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.fragment_map.*
 
-
 class MapFragment : Fragment() {
     companion object {
-        private const val FOCUSED_MARKER_ZOOM_LEVEL = 16F
         const val NEARBY_VEHICLES_LIST = "nearby_vehicles_list"
+        private const val VEHICLE_INTERACTION_CARD_FRAGMENT_TAG = "vehicle_interaction_card_fragment"
     }
 
-    private val viewModel by viewModels<MapFragmentViewModel>()
+    private val viewModel by activityViewModels<MapFragmentViewModel>()
     private val callback = OnMapReadyCallback { googleMap ->
-        viewModel.setupMarkers(googleMap)
+        viewModel.googleMap = googleMap
+        viewModel.setupMarkers()
         setupObservers()
-        btnMapLocateVehicle.setOnClickListener {
-            viewModel.locateVehicle(
-                googleMap,
-                FOCUSED_MARKER_ZOOM_LEVEL
-            )
-        }
     }
 
     override fun onCreateView(
@@ -54,22 +48,26 @@ class MapFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedVehicleLiveData.observe(this, Observer { vehicle ->
-            vehicle?.let { showVehicleAvailableFragment(vehicle) }
+        viewModel.selectedVehicleLiveData.observe(this, Observer { selectedVehicle ->
+            selectedVehicle?.let {  vehicle ->
+                showVehicleAvailableFragment()
+                btnMapLocateVehicle.apply {
+                    isEnabled = true
+                    setOnClickListener {
+                        viewModel.locateVehicle(vehicle, MapFragmentViewModel.FOCUSED_MARKER_ZOOM_LEVEL)
+                    }
+                }
+            } ?: let {
+                btnMapLocateVehicle.isEnabled = false
+            }
         })
-
-//        viewModel.rentedVehicleLiveData.observe(this, Observer { vehicle ->
-//
-//        })
     }
 
-    private fun showVehicleAvailableFragment(vehicle: Vehicle) {
-//        if (vehicle == viewModel.selectedVehicleLiveData.value) return
-
-        val fragment = VehicleAvailableFragment.newInstance(vehicle)
+    private fun showVehicleAvailableFragment() {
+        val fragment = VehicleInteractionFragment.newInstance()
         childFragmentManager.beginTransaction().apply {
             setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down)
-            replace(R.id.fragmentMapCardContainer, fragment, null)
+            replace(R.id.fragmentMapCardContainer, fragment, VEHICLE_INTERACTION_CARD_FRAGMENT_TAG)
             commit()
         }
     }

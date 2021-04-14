@@ -11,4 +11,7 @@
     <string name="button_map_locate_vehicle_text">Locate Vehicle</string>
     <string name="button_map_open_vehicle_text">Open Vehicle</string>
     <string name="button_map_nearby_vehicles_text">Nearby Vehicles</string>
+    <string name="button_card_vehicle_available_go_to_rented_vehicle_text">Go To Rented Vehicle</string>
+    <string name="button_card_vehicle_available_rent_vehicle_text">Rent Vehicle</string>
+    <string name="button_card_vehicle_available_end_rent_text">End Rent</string>
 </resources>

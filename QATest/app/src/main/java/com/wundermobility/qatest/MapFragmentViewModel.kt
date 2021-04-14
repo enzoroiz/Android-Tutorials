@@ -9,9 +9,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapFragmentViewModel: ViewModel() {
+class MapFragmentViewModel : ViewModel() {
     companion object {
-        private const val DEFAULT_MAP_ZOOM_LEVEL = 13F
+        const val DEFAULT_MAP_ZOOM_LEVEL = 13F
+        const val FOCUSED_MARKER_ZOOM_LEVEL = 16F
     }
 
     private val selectedVehicleMutableLiveData = MutableLiveData<Vehicle?>()
@@ -22,6 +23,7 @@ class MapFragmentViewModel: ViewModel() {
     val rentedVehicleLiveData: LiveData<Vehicle?>
         get() = rentedVehicleMutableLiveData
 
+    var googleMap: GoogleMap? = null
     val vehicles = arrayListOf(
         Vehicle(
             id = 1L,
@@ -85,39 +87,56 @@ class MapFragmentViewModel: ViewModel() {
         )
     )
 
-    fun setupMarkers(googleMap: GoogleMap) {
+    fun setupMarkers() {
         vehicles.forEach { vehicle ->
-            googleMap.addMarker(
-                MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromResource(vehicle.image))
-                    .position(vehicle.position)
-                    .title(vehicle.name)
-                    .snippet(vehicle.description)
-            ).apply { tag = vehicle }
-        }
+            googleMap?.let { map ->
+                map.apply {
+                    addMarker(
+                        MarkerOptions()
+                            .icon(BitmapDescriptorFactory.fromResource(vehicle.image))
+                            .position(vehicle.position)
+                            .title(vehicle.name)
+                            .snippet(vehicle.description)
+                    ).apply { tag = vehicle }
 
-        googleMap.setOnMarkerClickListener {
-            val currentVehicle = it.tag as Vehicle
-            if (currentVehicle != selectedVehicleMutableLiveData.value) {
-                selectedVehicleMutableLiveData.value = it.tag as Vehicle
+                    setOnMarkerClickListener {
+                        val currentVehicle = it.tag as Vehicle
+                        if (currentVehicle != selectedVehicleMutableLiveData.value) {
+                            selectedVehicleMutableLiveData.value = it.tag as Vehicle
+                        }
+
+                        false
+                    }
+                }
             }
-
-            false
         }
 
-        locateVehicle(googleMap)
+        locateVehicle(vehicles.first())
     }
 
-    fun locateVehicle(googleMap: GoogleMap, zoomLevel: Float = DEFAULT_MAP_ZOOM_LEVEL) {
-        googleMap.moveCamera(
+    fun locateVehicle(vehicle: Vehicle, zoomLevel: Float = DEFAULT_MAP_ZOOM_LEVEL) {
+        googleMap?.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
-                vehicles.first().position,
+                vehicle.position,
                 zoomLevel
             )
         )
     }
 
-    fun rentVehicle(vehicle: Vehicle) {
-        rentedVehicleMutableLiveData.value = vehicle
+    fun goToRentedVehicle() {
+        rentedVehicleMutableLiveData.value?.let { vehicle ->
+            selectedVehicleMutableLiveData.value = vehicle
+            locateVehicle(vehicle, FOCUSED_MARKER_ZOOM_LEVEL)
+        }
+    }
+
+    fun rentVehicle() {
+        selectedVehicleLiveData.value?.let { selectedVehicle ->
+            rentedVehicleMutableLiveData.value = selectedVehicle
+        }
+    }
+
+    fun endRent() {
+        rentedVehicleMutableLiveData.value = null
     }
 }
