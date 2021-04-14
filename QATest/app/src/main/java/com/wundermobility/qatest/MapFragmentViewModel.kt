@@ -100,8 +100,6 @@ class MapFragmentViewModel : ViewModel() {
                         MarkerOptions()
                             .icon(BitmapDescriptorFactory.fromResource(vehicle.image))
                             .position(vehicle.position)
-                            .title(vehicle.name)
-                            .snippet(vehicle.description)
                     ).apply { tag = vehicle }
 
                     setOnMarkerClickListener {
@@ -110,7 +108,8 @@ class MapFragmentViewModel : ViewModel() {
                             selectedVehicleMutableLiveData.value = it.tag as Vehicle
                         }
 
-                        false
+                        locateVehicle(currentVehicle, FOCUSED_MARKER_ZOOM_LEVEL)
+                        true
                     }
                 }
             }
@@ -120,7 +119,7 @@ class MapFragmentViewModel : ViewModel() {
     }
 
     fun locateVehicle(vehicle: Vehicle, zoomLevel: Float = DEFAULT_MAP_ZOOM_LEVEL) {
-        googleMap?.moveCamera(
+        googleMap?.animateCamera(
             CameraUpdateFactory.newLatLngZoom(
                 vehicle.position,
                 zoomLevel

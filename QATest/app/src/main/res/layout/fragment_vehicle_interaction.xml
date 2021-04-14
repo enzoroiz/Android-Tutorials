@@ -117,8 +117,8 @@
         android:id="@+id/layoutCardVehicleAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,9 +126,12 @@
 
         <Button
             android:id="@+id/btnCardVehicleGoToRentedVehicle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@drawable/button_background"
             android:text="@string/button_card_vehicle_available_go_to_rented_vehicle_text"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,9 +142,12 @@
 
         <Button
             android:id="@+id/btnCardVehicleRentVehicle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@drawable/button_background"
             android:text="@string/button_card_vehicle_available_rent_vehicle_text"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -150,9 +156,12 @@
 
         <Button
             android:id="@+id/btnCardVehicleEndRent"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
             android:text="@string/button_card_vehicle_available_end_rent_text"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
