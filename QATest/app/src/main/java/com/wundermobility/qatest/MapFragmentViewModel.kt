@@ -144,6 +144,7 @@ class MapFragmentViewModel : ViewModel() {
 
     fun endRent() {
         handler.postDelayed({
+            rentedVehicleMutableLiveData.value?.let { it.rides++ }
             rentedVehicleMutableLiveData.value = null
         }, LOADING_TIME_IN_MS)
     }

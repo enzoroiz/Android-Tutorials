@@ -80,18 +80,32 @@
             android:id="@+id/txtCardVehicleFuelLevel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/txtCardVehicleDescription"
-            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleDescription"
+            android:layout_marginStart="8dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/txtCardVehicleType"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="84%" />
 
         <TextView
             android:id="@+id/txtCardVehiclePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBaseline_toBaselineOf="@+id/txtCardVehicleFuelLevel"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleDescription"
             tools:text="5.32$ / min" />
+
+        <TextView
+            android:id="@+id/txtCardVehicleRides"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/txtCardVehicleDescription"
+            app:layout_constraintTop_toBottomOf="@+id/txtCardVehicleDescription"
+            tools:text="Rides: 5"
+            tools:visibility="visible" />
 
         <View
             android:id="@+id/divider"
@@ -129,7 +143,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/button_background"
-            android:text="@string/button_card_vehicle_available_go_to_rented_vehicle_text"
+            android:text="@string/button_card_vehicle_go_to_rented_vehicle_text"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:visibility="gone"
@@ -145,7 +159,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/button_background"
-            android:text="@string/button_card_vehicle_available_rent_vehicle_text"
+            android:text="@string/button_card_vehicle_rent_vehicle_text"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:visibility="gone"
@@ -159,7 +173,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background"
-            android:text="@string/button_card_vehicle_available_end_rent_text"
+            android:text="@string/button_card_vehicle_end_rent_text"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:visibility="gone"

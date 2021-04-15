@@ -14,5 +14,6 @@ data class Vehicle(
     val type: String,
     val fuelLevel: String,
     val price: String,
-    @DrawableRes val image: Int
+    @DrawableRes val image: Int,
+    var rides: Int = 0
 ) : Parcelable

@@ -39,13 +39,21 @@ class VehicleInteractionFragment : Fragment() {
         } ?: let { layoutCardVehicle.visibility = View.INVISIBLE }
     }
 
-    private fun setupActions(selected: Vehicle?, rentedVehicle: Vehicle?) {
+    private fun setupActions(selectedVehicle: Vehicle?, rentedVehicle: Vehicle?) {
         btnCardVehicleGoToRentedVehicle.visibility = View.GONE
         btnCardVehicleRentVehicle.visibility = View.GONE
         btnCardVehicleEndRent.visibility = View.GONE
 
+        selectedVehicle?.let { selected ->
+            if (selected.rides > 0) {
+                txtCardVehicleRides.text =
+                    getString(R.string.button_card_vehicle_rides_text, selected.rides)
+                txtCardVehicleRides.visibility = View.VISIBLE
+            }
+        }
+
         rentedVehicle?.let { rented ->
-            if (selected == rented) {
+            if (selectedVehicle == rented) {
                 btnCardVehicleEndRent.apply {
                     visibility = View.VISIBLE
                     isEnabled = true
