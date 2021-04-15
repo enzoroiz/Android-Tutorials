@@ -55,38 +55,13 @@
         tools:text="Fastest electric bike available for rental in this whole city!" />
 
     <TextView
-        android:id="@+id/txtNearbyVehicleListItemFuelLevelLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/text_view_nearby_vehicles_list_item_fuel_level_label"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txtNearbyVehicleListItemDescription"
-        app:layout_constraintTop_toBottomOf="@+id/txtNearbyVehicleListItemDescription"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/txtNearbyVehicleListItemFuelLevel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/txtNearbyVehicleListItemFuelLevelLabel"
-        app:layout_constraintEnd_toStartOf="@+id/txtNearbyVehicleListItemPriceLabel"
-        app:layout_constraintStart_toEndOf="@+id/txtNearbyVehicleListItemFuelLevelLabel"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/txtNearbyVehicleListItemDescription"
+        app:layout_constraintTop_toBottomOf="@+id/txtNearbyVehicleListItemDescription"
         tools:text="84%" />
-
-    <TextView
-        android:id="@+id/txtNearbyVehicleListItemPriceLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:text="@string/text_view_nearby_vehicles_list_item_price_label"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/txtNearbyVehicleListItemFuelLevel"
-        app:layout_constraintEnd_toStartOf="@+id/txtNearbyVehicleListItemPrice" />
 
     <TextView
         android:id="@+id/txtNearbyVehicleListItemPrice"
