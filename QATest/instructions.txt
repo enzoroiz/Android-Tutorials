@@ -1,0 +1,19 @@
+Login screen
+- Credentials: qatest@wundermobility.com / 12345678
+- Invalid login credentials shows an error message
+
+Map screen
+- Six vehicle markers are on the map
+- There are two buttons on the top right corner of the map, they are:
+- - Locate Selected Vehicle: When a vehicle is selected on the map and you navigate away from it, when tapping this button, should navigate you back to the selected vehicle. If there's no selected vehicle, the button should be disabled.
+- - Nearby Vehicles List: this will open a new activity with a list of vehicles on the map.
+
+- When a vehicle is marker is tapped, a vehicle is selected and its data is shown. One can take the following actions on the card:
+- - Rent Vehicle: if there's no ongoing rental
+- - End Rent: if there's an ongoing rental. The information on total rides taken for this vehicle should be updated in the card.
+- - Go to Rented Vehicle: if there's an ongoing rental and a different vehicle from the rented one is selected. This will navigate back to the currently rented vehicle.
+- - Close the card, deselecting a vehicle by pressing the X icon at the top right.
+
+Nearby Vehicles List screen
+- List of the details for the vehicles shown on the map.
+- When an item list is tapped a dialog with the same details for the vehicle should then be shown.
