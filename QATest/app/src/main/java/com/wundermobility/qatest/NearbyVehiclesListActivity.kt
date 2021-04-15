@@ -17,6 +17,8 @@ class NearbyVehiclesListActivity : AppCompatActivity() {
         }
 
         lstNearbyVehicles.layoutManager = LinearLayoutManager(this)
-        lstNearbyVehicles.adapter = NearbyVehiclesListAdapter(vehicles)
+        lstNearbyVehicles.adapter = NearbyVehiclesListAdapter(vehicles) { vehicle ->
+            VehicleDetailsDialogFragment().show(supportFragmentManager, vehicle)
+        }
     }
 }

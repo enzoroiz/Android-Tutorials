@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.nearby_vehicles_list_item.view.*
 
-class NearbyVehiclesListAdapter(private val vehicles: List<Vehicle>): RecyclerView.Adapter<NearbyVehiclesListViewHolder>() {
+class NearbyVehiclesListAdapter(private val vehicles: List<Vehicle>, private val onItemClickListener: (Vehicle) -> Unit): RecyclerView.Adapter<NearbyVehiclesListViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -21,12 +21,13 @@ class NearbyVehiclesListAdapter(private val vehicles: List<Vehicle>): RecyclerVi
     }
 
     override fun onBindViewHolder(holder: NearbyVehiclesListViewHolder, position: Int) {
-        holder.bind(vehicles[position])
+        holder.bind(vehicles[position], onItemClickListener)
     }
 }
 
 class NearbyVehiclesListViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
-    fun bind(vehicle: Vehicle) {
+    fun bind(vehicle: Vehicle, onItemClickListener: (Vehicle) -> Unit) {
+        containerView.setOnClickListener { onItemClickListener(vehicle) }
         containerView.imgNearbyVehicleImage.setImageResource(vehicle.image)
         containerView.txtNearbyVehicleListItemType.text = vehicle.type
         containerView.txtNearbyVehicleListItemName.text = vehicle.name
