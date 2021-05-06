@@ -1,4 +1,5 @@
 Hey!
+
 When first running the app, you will realize that the map will not show up since the Google Maps key is missing.
 On your Logcat an error like this will appear:
 Android Application (<cert_fingerprint>;<package_name>): XX:F3:74:E4:47:07:E9:9B:84:DB:C1:28:38:23:AD:84:70:DD:D5:YY;com.wundermobility.qatest
@@ -11,6 +12,19 @@ For instance for the example below would be:
 https://console.cloud.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=XX:F3:74:E4:47:07:E9:9B:84:DB:C1:28:38:23:AD:84:70:DD:D5:YY;com.wundermobility.qatest
 
 Or alternatively in https://console.cloud.google.com/apis
+
+Create a new project and setup the API Key.
+
+With the API Key created.
+Go to /app/src/main/res/values/keys.xml
+Paste the key within google_maps_key tags.
+
+Run the project and you should be able to see the map!
+
+Good luck with your task!
+
+------------------------------------------------------------------------------------------------------------------------
+APP STRUCTURE
 
 Login screen
 - Credentials: qatest@wundermobility.com / 12345678
