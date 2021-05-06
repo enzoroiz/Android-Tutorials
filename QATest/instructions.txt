@@ -1,3 +1,17 @@
+Hey!
+When first running the app, you will realize that the map will not show up since the Google Maps key is missing.
+On your Logcat an error like this will appear:
+Android Application (<cert_fingerprint>;<package_name>): XX:F3:74:E4:47:07:E9:9B:84:DB:C1:28:38:23:AD:84:70:DD:D5:YY;com.wundermobility.qatest
+
+You have then to create an Google Maps API Key with this data.
+You can do that by changing YOUR_CERT_FINGERPRINT_HERE in the link below, for the one found in the Logcat .
+https://console.cloud.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=YOUR_CERT_FINGERPRINT_HERE;com.wundermobility.qatest
+
+For instance for the example below would be:
+https://console.cloud.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=XX:F3:74:E4:47:07:E9:9B:84:DB:C1:28:38:23:AD:84:70:DD:D5:YY;com.wundermobility.qatest
+
+Or alternatively in https://console.cloud.google.com/apis
+
 Login screen
 - Credentials: qatest@wundermobility.com / 12345678
 - Invalid login credentials shows an error message
