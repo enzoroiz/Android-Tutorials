@@ -9,7 +9,11 @@
         android:id="@+id/newsFragment"
         android:name="com.enzoroiz.newsapp.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <argument
+            android:name="article"
+            app:argType="com.enzoroiz.newsapp.data.model.Article" />
+    </fragment>
     <fragment
         android:id="@+id/savedNewsFragment"
         android:name="com.enzoroiz.newsapp.SavedNewsFragment"

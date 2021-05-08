@@ -5,27 +5,64 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.enzoroiz.newsapp.databinding.FragmentNewsHeadlinesBinding
+import com.enzoroiz.newsapp.domain.repository.Resource
+import com.enzoroiz.newsapp.presentation.NewsAdapter
+import com.enzoroiz.newsapp.presentation.viewmodel.NewsViewModel
+import com.enzoroiz.newsapp.presentation.viewmodel.NewsViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NewsHeadlinesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class NewsHeadlinesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    @Inject
+    lateinit var viewModelFactory: NewsViewModelFactory
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    companion object {
+        const val DEFAULT_COUNTRY_CODE = "br"
+        const val PAGE_SIZE = 20
+        const val STARTING_PAGE = 1
+    }
+
+    private val viewModel by activityViewModels<NewsViewModel> { viewModelFactory }
+    private lateinit var binding: FragmentNewsHeadlinesBinding
+    private var page = STARTING_PAGE
+    private var isScrolling = false
+    private var isLoading = false
+    private var isLastPage = false
+
+    private val adapter = NewsAdapter { article ->
+        findNavController().navigate(
+            NewsHeadlinesFragmentDirections.actionNewsHeadlinesFragmentToNewsFragment(article)
+        )
+    }
+
+    private val onScrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            isScrolling = true
+        }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            val layoutManager = binding.lstArticles.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val itemsDisplayed = layoutManager.childCount
+            val listSize = layoutManager.itemCount
+            val hasReachedListBottom = firstVisibleItemPosition + itemsDisplayed >= listSize
+
+            if (hasReachedListBottom && isScrolling && isLoading.not() && isLastPage.not()) {
+                page++
+                isScrolling = false
+                viewModel.getNewsHeadlines(page, DEFAULT_COUNTRY_CODE)
+            }
         }
     }
 
@@ -33,27 +70,50 @@ class NewsHeadlinesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_news_headlines, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NewsHeadlinesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NewsHeadlinesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentNewsHeadlinesBinding.bind(view)
+
+        binding.lstArticles.layoutManager = LinearLayoutManager(requireContext())
+        binding.lstArticles.adapter = adapter
+        binding.lstArticles.addOnScrollListener(onScrollListener)
+
+        getNewsList()
+    }
+
+    private fun getNewsList() {
+        viewModel.getNewsHeadlines(STARTING_PAGE, DEFAULT_COUNTRY_CODE)
+        viewModel.getNewsHeadlinesLiveData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    isLoading = false
+                    isLastPage = it.data?.totalResults?.let { totalResults ->
+                        if (totalResults % PAGE_SIZE == 0) {
+                            (totalResults / PAGE_SIZE) == page
+                        } else {
+                            (totalResults / PAGE_SIZE) + 1 == page
+                        }
+                    } ?: false
+
+                    binding.progressBar.visibility = View.GONE
+                    adapter.differ.submitList(it.data?.articles)
+                }
+
+                is Resource.Error -> {
+                    isLoading = false
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), getString(R.string.error_get_news_list_failed), Toast.LENGTH_LONG).show()
+                }
+
+                is Resource.Loading -> {
+                    isLoading = true
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
+        })
     }
 }

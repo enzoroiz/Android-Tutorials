@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">NewsApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="main_menu_item_news_headlines">News Headlines</string>
     <string name="main_menu_item_saved_news">Saved News</string>
+    <string name="error_get_news_list_failed">It wasn\'t possible to fetch the news.</string>
+    <string name="error_load_article_url_failed">Invalid article URL. It wasn\'t possible to open the browser</string>
 </resources>
