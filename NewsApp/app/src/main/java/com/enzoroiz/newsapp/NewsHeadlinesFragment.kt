@@ -155,7 +155,7 @@ class NewsHeadlinesFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.error_get_news_list_failed),
+                    getString(R.string.news_headlines_fragment_message_get_news_list_failed),
                     Toast.LENGTH_LONG
                 ).show()
             }
