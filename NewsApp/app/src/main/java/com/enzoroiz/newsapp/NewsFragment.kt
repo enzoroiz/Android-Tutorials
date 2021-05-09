@@ -32,8 +32,8 @@ class NewsFragment : Fragment() {
 
         webView.apply {
             webViewClient = WebViewClient()
-            if (article.url.isEmpty().not()) {
-                loadUrl(article.url)
+            if (article.url.isNullOrEmpty().not()) {
+                loadUrl(article.url!!)
             } else {
                 Toast.makeText(requireContext(), requireContext().getString(R.string.error_load_article_url_failed), Toast.LENGTH_LONG).show()
             }

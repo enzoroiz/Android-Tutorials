@@ -1,8 +1,7 @@
 package com.enzoroiz.newsapp.presentation.di
 
 import android.app.Application
-import com.enzoroiz.newsapp.domain.usecase.GetNewsHeadlinesUseCase
-import com.enzoroiz.newsapp.domain.usecase.GetSearchedNewsUseCase
+import com.enzoroiz.newsapp.domain.usecase.*
 import com.enzoroiz.newsapp.presentation.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -18,8 +17,19 @@ class FactoryModule {
     fun provideNewsViewModelFactory(
         application: Application,
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-        getSearchedNewsUseCase: GetSearchedNewsUseCase
+        getSearchedNewsUseCase: GetSearchedNewsUseCase,
+        getSavedArticlesUseCase: GetSavedArticlesUseCase,
+        saveArticleUseCase: SaveArticleUseCase,
+        deleteSavedArticlesUseCase: DeleteSavedArticlesUseCase
     ): NewsViewModelFactory {
-        return NewsViewModelFactory(application, getNewsHeadlinesUseCase, getSearchedNewsUseCase)
+        return NewsViewModelFactory(
+            application,
+            getNewsHeadlinesUseCase,
+            getSearchedNewsUseCase,
+            getSavedArticlesUseCase,
+            saveArticleUseCase,
+            deleteSavedArticlesUseCase
+
+        )
     }
 }

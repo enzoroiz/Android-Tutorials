@@ -25,14 +25,14 @@ class UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideSaveArticleUseCaseModule(repository: NewsRepository): SaveArticleUseCase {
-        return SaveArticleUseCase(repository)
+    fun provideGetSavedArticlesUseCaseModule(repository: NewsRepository): GetSavedArticlesUseCase {
+        return GetSavedArticlesUseCase(repository)
     }
 
     @Singleton
     @Provides
-    fun provideGetSavedArticlesUseCaseModule(repository: NewsRepository): GetSavedArticlesUseCase {
-        return GetSavedArticlesUseCase(repository)
+    fun provideSaveArticleUseCaseModule(repository: NewsRepository): SaveArticleUseCase {
+        return SaveArticleUseCase(repository)
     }
 
     @Singleton

@@ -1,6 +1,7 @@
 package com.enzoroiz.newsapp.presentation.di
 
 import com.enzoroiz.newsapp.data.repository.NewsRepositoryImpl
+import com.enzoroiz.newsapp.data.repository.datasource.NewsLocalDataSource
 import com.enzoroiz.newsapp.data.repository.datasource.NewsRemoteDataSource
 import com.enzoroiz.newsapp.domain.repository.NewsRepository
 import dagger.Module
@@ -14,7 +15,10 @@ import javax.inject.Singleton
 class RepositoryModule {
     @Singleton
     @Provides
-    fun provideNewsRepository(remoteDataSource: NewsRemoteDataSource): NewsRepository {
-        return NewsRepositoryImpl(remoteDataSource)
+    fun provideNewsRepository(
+        remoteDataSource: NewsRemoteDataSource,
+        localDataSource: NewsLocalDataSource
+    ): NewsRepository {
+        return NewsRepositoryImpl(remoteDataSource, localDataSource)
     }
 }

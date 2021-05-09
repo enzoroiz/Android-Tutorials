@@ -2,10 +2,10 @@ package com.enzoroiz.newsapp.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.enzoroiz.newsapp.data.model.Article
 import com.enzoroiz.newsapp.data.model.NewsResponse
 import com.enzoroiz.newsapp.domain.repository.Resource
-import com.enzoroiz.newsapp.domain.usecase.GetNewsHeadlinesUseCase
-import com.enzoroiz.newsapp.domain.usecase.GetSearchedNewsUseCase
+import com.enzoroiz.newsapp.domain.usecase.*
 import com.enzoroiz.newsapp.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +14,10 @@ import java.lang.Exception
 class NewsViewModel(
     application: Application,
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase,
+    private val getSavedArticlesUseCase: GetSavedArticlesUseCase,
+    private val saveArticlesUseCase: SaveArticleUseCase,
+    private val deleteSavedArticlesUseCase: DeleteSavedArticlesUseCase
 ): AndroidViewModel(application) {
     private val getNewsHeadlinesMutableLiveData = MutableLiveData<Resource<NewsResponse>>()
     val getNewsHeadlinesLiveData: LiveData<Resource<NewsResponse>>
@@ -53,6 +56,22 @@ class NewsViewModel(
             } catch (e: Exception) {
                 getSearchedNewsMutableLiveData.postValue(Resource.Error(e.message.toString()))
             }
+        }
+    }
+
+    fun getSavedArticles(): LiveData<List<Article>> {
+        return getSavedArticlesUseCase.execute().asLiveData(viewModelScope.coroutineContext)
+    }
+
+    fun saveArticle(article: Article) {
+        viewModelScope.launch {
+            saveArticlesUseCase.execute(article)
+        }
+    }
+
+    fun deleteSavedArticle(article: Article) {
+        viewModelScope.launch {
+            deleteSavedArticlesUseCase.execute(article)
         }
     }
 }

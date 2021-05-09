@@ -5,6 +5,6 @@ import com.enzoroiz.newsapp.domain.repository.NewsRepository
 
 class DeleteSavedArticlesUseCase(private val repository: NewsRepository) {
     suspend fun execute(article: Article) {
-        repository.deleteArticle(article)
+        repository.deleteSavedArticle(article)
     }
 }

@@ -41,7 +41,7 @@ class NewsAdapter(private val onItemClickListener: (Article) -> Unit): RecyclerV
             binding.root.setOnClickListener { onItemClickListener(article) }
             binding.txtTitle.text = article.title
             binding.txtDescription.text = article.description
-            binding.txtSource.text = article.source.name
+            binding.txtSource.text = article.source?.name
             binding.txtPublishedAt.text = article.publishedAt
             Glide.with(binding.imgThumbnail)
                 .load(article.urlToImage)
