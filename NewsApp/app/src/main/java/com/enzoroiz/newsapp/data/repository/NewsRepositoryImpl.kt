@@ -15,8 +15,8 @@ class NewsRepositoryImpl(
         return fromResponseToResource(remoteDataSource.getNewsHeadlines(page, country))
     }
 
-    override suspend fun searchNews(searchQuery: String): Resource<NewsResponse> {
-        return fromResponseToResource(remoteDataSource.searchNews(searchQuery))
+    override suspend fun searchNews(page: Int, country: String, searchQuery: String): Resource<NewsResponse> {
+        return fromResponseToResource(remoteDataSource.searchNews(page, country, searchQuery))
     }
 
     override suspend fun saveArticle(article: Article) {

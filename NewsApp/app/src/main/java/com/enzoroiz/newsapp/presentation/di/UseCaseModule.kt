@@ -19,6 +19,12 @@ class UseCaseModule {
 
     @Singleton
     @Provides
+    fun provideGetSearchedNewsUseCaseModule(repository: NewsRepository): GetSearchedNewsUseCase {
+        return GetSearchedNewsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
     fun provideSaveArticleUseCaseModule(repository: NewsRepository): SaveArticleUseCase {
         return SaveArticleUseCase(repository)
     }
@@ -27,12 +33,6 @@ class UseCaseModule {
     @Provides
     fun provideGetSavedArticlesUseCaseModule(repository: NewsRepository): GetSavedArticlesUseCase {
         return GetSavedArticlesUseCase(repository)
-    }
-
-    @Singleton
-    @Provides
-    fun provideSearchNewsUseCaseModule(repository: NewsRepository): SearchNewsUseCase {
-        return SearchNewsUseCase(repository)
     }
 
     @Singleton

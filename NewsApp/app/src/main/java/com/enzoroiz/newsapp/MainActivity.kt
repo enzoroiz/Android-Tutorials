@@ -3,6 +3,7 @@ package com.enzoroiz.newsapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.enzoroiz.newsapp.databinding.ActivityMainBinding
@@ -25,8 +26,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bnvMain.setupWithNavController(
-            fragmentNavigationHost.findNavController()
-        )
+        val fragmentNavigationHost = supportFragmentManager.findFragmentById(R.id.fragmentNavigationHost) as NavHostFragment
+        val navigationController = fragmentNavigationHost.findNavController()
+
+        binding.bnvMain.setupWithNavController(navigationController)
     }
 }

@@ -2,6 +2,7 @@ package com.enzoroiz.newsapp.presentation.di
 
 import android.app.Application
 import com.enzoroiz.newsapp.domain.usecase.GetNewsHeadlinesUseCase
+import com.enzoroiz.newsapp.domain.usecase.GetSearchedNewsUseCase
 import com.enzoroiz.newsapp.presentation.viewmodel.NewsViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,11 @@ import javax.inject.Singleton
 class FactoryModule {
     @Singleton
     @Provides
-    fun provideNewsViewModelFactory(application: Application, useCase: GetNewsHeadlinesUseCase): NewsViewModelFactory {
-        return NewsViewModelFactory(application, useCase)
+    fun provideNewsViewModelFactory(
+        application: Application,
+        getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+        getSearchedNewsUseCase: GetSearchedNewsUseCase
+    ): NewsViewModelFactory {
+        return NewsViewModelFactory(application, getNewsHeadlinesUseCase, getSearchedNewsUseCase)
     }
 }

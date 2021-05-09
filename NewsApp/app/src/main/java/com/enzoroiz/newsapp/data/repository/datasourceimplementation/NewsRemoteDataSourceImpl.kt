@@ -12,8 +12,8 @@ class NewsRemoteDataSourceImpl(
         return service.getNewsHeadlines(page, country)
     }
 
-    override suspend fun searchNews(searchQuery: String): Response<NewsResponse> {
-        return service.searchNews(searchQuery)
+    override suspend fun searchNews(page: Int, country: String, searchQuery: String): Response<NewsResponse> {
+        return service.searchNews(page, country, searchQuery)
     }
 
 }

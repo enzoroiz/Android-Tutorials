@@ -1,23 +1,27 @@
 package com.enzoroiz.newsapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.enzoroiz.newsapp.data.model.NewsResponse
 import com.enzoroiz.newsapp.databinding.FragmentNewsHeadlinesBinding
 import com.enzoroiz.newsapp.domain.repository.Resource
 import com.enzoroiz.newsapp.presentation.NewsAdapter
 import com.enzoroiz.newsapp.presentation.viewmodel.NewsViewModel
 import com.enzoroiz.newsapp.presentation.viewmodel.NewsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,9 +30,10 @@ class NewsHeadlinesFragment : Fragment() {
     lateinit var viewModelFactory: NewsViewModelFactory
 
     companion object {
-        const val DEFAULT_COUNTRY_CODE = "br"
-        const val PAGE_SIZE = 20
-        const val STARTING_PAGE = 1
+        private const val DEFAULT_COUNTRY_CODE = "br"
+        private const val SEARCH_DELAY = 3000L
+        private const val PAGE_SIZE = 20
+        private const val STARTING_PAGE = 1
     }
 
     private val viewModel by activityViewModels<NewsViewModel> { viewModelFactory }
@@ -83,37 +88,82 @@ class NewsHeadlinesFragment : Fragment() {
         binding.lstArticles.addOnScrollListener(onScrollListener)
 
         getNewsList()
+        getSearchedNewsList()
     }
 
     private fun getNewsList() {
         viewModel.getNewsHeadlines(STARTING_PAGE, DEFAULT_COUNTRY_CODE)
         viewModel.getNewsHeadlinesLiveData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    isLoading = false
-                    isLastPage = it.data?.totalResults?.let { totalResults ->
-                        if (totalResults % PAGE_SIZE == 0) {
-                            (totalResults / PAGE_SIZE) == page
-                        } else {
-                            (totalResults / PAGE_SIZE) + 1 == page
-                        }
-                    } ?: false
+            handleNewsResponse(it)
+        })
+    }
 
-                    binding.progressBar.visibility = View.GONE
-                    adapter.differ.submitList(it.data?.articles)
+    private fun getSearchedNewsList() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            private var currentQuery: String? = null
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.getSearchedNews(STARTING_PAGE, DEFAULT_COUNTRY_CODE, query.toString())
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                currentQuery = query
+                MainScope().launch {
+                    delay(SEARCH_DELAY)
+                    if (currentQuery == query) {
+                        viewModel.getSearchedNews(
+                            STARTING_PAGE,
+                            DEFAULT_COUNTRY_CODE,
+                            query.toString()
+                        )
+                    }
                 }
 
-                is Resource.Error -> {
-                    isLoading = false
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), getString(R.string.error_get_news_list_failed), Toast.LENGTH_LONG).show()
-                }
-
-                is Resource.Loading -> {
-                    isLoading = true
-                    binding.progressBar.visibility = View.VISIBLE
-                }
+                return false
             }
         })
+
+        binding.searchView.setOnCloseListener {
+            viewModel.getNewsHeadlines(STARTING_PAGE, DEFAULT_COUNTRY_CODE)
+            false
+        }
+
+        viewModel.getSearchedNewsLiveData.observe(viewLifecycleOwner, Observer {
+            handleNewsResponse(it)
+        })
+    }
+
+    private fun handleNewsResponse(response: Resource<NewsResponse>) {
+        when (response) {
+            is Resource.Success -> {
+                isLoading = false
+                isLastPage = response.data?.totalResults?.let { totalResults ->
+                    if (totalResults % PAGE_SIZE == 0) {
+                        (totalResults / PAGE_SIZE) == page
+                    } else {
+                        (totalResults / PAGE_SIZE) + 1 == page
+                    }
+                } ?: false
+
+                binding.progressBar.visibility = View.GONE
+                adapter.differ.submitList(response.data?.articles)
+            }
+
+            is Resource.Error -> {
+                isLoading = false
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_get_news_list_failed),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            is Resource.Loading -> {
+                isLoading = true
+                binding.progressBar.visibility = View.VISIBLE
+            }
+        }
     }
 }
