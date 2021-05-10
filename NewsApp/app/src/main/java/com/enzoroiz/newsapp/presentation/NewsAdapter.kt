@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.enzoroiz.newsapp.data.model.Article
 import com.enzoroiz.newsapp.databinding.ListItemBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewsAdapter(private val onItemClickListener: (Article) -> Unit): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<Article>() {
@@ -42,11 +44,20 @@ class NewsAdapter(private val onItemClickListener: (Article) -> Unit): RecyclerV
             binding.txtTitle.text = article.title
             binding.txtDescription.text = article.description
             binding.txtSource.text = article.source?.name
-            binding.txtPublishedAt.text = article.publishedAt
+            binding.txtPublishedAt.text = getDateFormatted(article.publishedAt)
             Glide.with(binding.imgThumbnail)
                 .load(article.urlToImage)
                 .fitCenter()
                 .into(binding.imgThumbnail)
+        }
+
+        private fun getDateFormatted(date: String?): String? {
+            return date?.let {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+                dateFormat.parse(it)?.let { formattedDate ->
+                    SimpleDateFormat("dd/MM/yy hh:mm", Locale.getDefault()).format(formattedDate)
+                }
+            }
         }
     }
 }

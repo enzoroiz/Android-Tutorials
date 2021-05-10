@@ -14,7 +14,7 @@ import com.enzoroiz.newsapp.data.model.Article
 abstract class AppDatabase: RoomDatabase() {
     companion object {
         const val DATABASE_NAME = "app_database"
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
     }
 
     abstract fun getArticleDAO(): ArticleDAO
