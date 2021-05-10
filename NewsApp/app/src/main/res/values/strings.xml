@@ -5,4 +5,6 @@
     <string name="news_headlines_fragment_message_get_news_list_failed">It wasn\'t possible to fetch the news.</string>
     <string name="news_fragment_message_load_article_url_failed">Invalid article URL. It wasn\'t possible to open the browser</string>
     <string name="news_fragment_message_article_saved">Article successfully saved!</string>
+    <string name="saved_news_fragment_message_article_deleted">Article deleted successfully!</string>
+    <string name="saved_news_fragment_button_undo_label">Undo</string>
 </resources>
